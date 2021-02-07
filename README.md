@@ -52,7 +52,7 @@ Massは質量の意味です。
 - Heroku
 
 # DataBase
-## users テーブル
+## Users テーブル
 | Column                | Type    | Options      |
 | --------------------- | ------- | ------------ |
 | name                  | string  | null: false  |
@@ -63,31 +63,49 @@ Massは質量の意味です。
 - has_many :task_logs
 - has_many :comments
 - has_many :requires
+- has_many :done_tasks
 
 ## Requires テーブル
 | Column                  | Type       | Options                        |
 | ----------------------- | ---------- | ------------------------------ |
 | user                    | references | null: false,foreign_key: true  |
 | task_log                | references | null: false,foreign_key: true  |
-| text                    | string     | null: false                    |
+| require_text            | string     | null: false                    |
 | image                   | img        |                                |
-| date                    | date       | null: false                    |
-| done                    | string     |                                |
+| priority                | integer    | null: false                    |
 
 ### Association
 - belongs_to :user
+- belongs_to :done_task
+- has_many :task_logs
 
 ## Comments テーブル
 | Column                  | Type       | Options                        |
 | ----------------------- | ---------- | ------------------------------ |
 | user                    | references | null: false,foreign_key: true  |
-| task_log                | references | null: false,foreign_key: true  |
+| done_task_log           | references | null: false,foreign_key: true  |
 | text                    | string     | null: false                    |
 | image                   | img        |                                |
 | date                    | date       | null: false                    |
 
 ### Association
 - belongs_to :user
+- belongs_to :task_log
+
+## Done_tasks テーブル
+| Column                  | Type       | Options                        |
+| ----------------------- | ---------- | ------------------------------ |
+| user                    | references | null: false,foreign_key: true  |
+| require                 | references | null: false,foreign_key: true  |
+| task_log                | references | null: false,foreign_key: true  |
+| working_time            | integer    | null: false                    |
+| done_text               | text       | null: false                    |
+| image                   | img        | null: false                    |
+
+### Association
+- belongs_to :user
+- belongs_to :require
+- belongs_to :task_log
 
 ## Task_logs テーブル
 | Column                  | Type       | Options                        |
@@ -95,19 +113,21 @@ Massは質量の意味です。
 | date                    | date       | null: false                    |
 | user                    | references | null: false,foreign_key: true  |
 | task                    | references | null: false,foreign_key: true  |
+| comment                 | references | null: false,foreign_key: true  |
 
 ### Association
 - belongs_to :user
+- belongs_to :require
+- belongs_to :comment
 - has_many :tasks, through: :task_log_task
+- has_many :done_tasks
 
 ## Tasks テーブル
 | Column                  | Type       | Options                        |
 | ----------------------- | ---------- | ------------------------------ |
-| date                    | date       | null: false                    |
-| task                    | string     | null: false                    |
-| working_time            | integer    | null: false                    |
-| normal_time             | integer    | null: false                    |
 | task_log                | references | null: false,foreign_key: true  |
+| task                    | string     | null: false                    |
+| normal_time             | integer    | null: false                    |
 
 ### Association
 - has_many :task_logs, through: :task_log_task
