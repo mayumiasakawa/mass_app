@@ -11242,3 +11242,30 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+/* *** burger-menu *** */
+.menu-button__icon {
+  background-color: var(--white-color-primary);
+  width: 26px; }
+.menu-button__icon::before, .menu-button__icon::after {
+  background-color: #f7f7f7;
+  content: "";
+  display: inline-block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: transform 0.3s;
+  width: 100%; }
+.menu-button__icon.-open::before {
+  transform: translateY(-6px); }
+.menu-button__icon.-open::after {
+  transform: translateY(6px); }
+.menu-button__icon.-close {
+  background-color: transparent; }
+.menu-button__icon.-close::before {
+  background-color: #f7f7f7;
+  transform: translateY(0) rotate(30deg); }
+.menu-button__icon.-close::after {
+  background-color: #f7f7f7;
+  transform: translateY(0) rotate(-30deg); }
