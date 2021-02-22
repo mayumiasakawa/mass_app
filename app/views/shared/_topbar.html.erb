@@ -13,14 +13,6 @@
       <!-- Nav Item - User Information -->
       <li class="nav-item dropdown no-arrow">
           <span class="nav-link">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    <p class="notice"><%= notice %></p>
-                    <p class="alert"><%= alert %></p>
-                </span>
-          </span>
-      </li>
-      <li class="nav-item dropdown no-arrow">
-          <span class="nav-link">
               <span class="mr-2 d-none d-lg-inline text-gray-600 small">今日の日付 2020年2月19日（金）</span>
           </span>
       </li>
@@ -31,7 +23,9 @@
       <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">浅川 真由美</span>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                <%= current_user.last_name  + " " + current_user.first_name %>
+              </span>
           </a>
           <!-- Dropdown - User Information -->
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -41,10 +35,9 @@
                   設定
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  ログアウト
-              </a>
+              <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item", data: { toggle:"modal", target:"#logoutModal"} do %>
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>ログアウト
+              <% end %>
           </div>
       </li>
 
