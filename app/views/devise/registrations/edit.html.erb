@@ -1,43 +1,67 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<body class="bg-gradient-primary">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="container">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Edit <%= resource_name.to_s.humanize %>!</h1>
+                        </div>
+                        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                          <%= render "devise/shared/error_messages", resource: resource %>
+                          <form class="user">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <%= f.text_field :first_name, autofocus: true, autocomplete: "given-name", class:"form-control form-control-user", id:"exampleFirstName",
+                                  placeholder:"First Name", maxlength: "12" %>
+                                </div>
+                                <div class="col-sm-6">
+                                      <%= f.text_field :last_name, autofocus: true, autocomplete: "family-name", class:"form-control form-control-user", id:"exampleLastName",
+                                      placeholder:"Last Name", maxlength: "12" %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-control-user", id:"exampleInputEmail",
+                              placeholder:"Email Address" %>
+                            </div>
+                            <br>
+                            <% if @minimum_password_length %>
+                              <em>(<%= @minimum_password_length %> characters minimum)</em>
+                            <% end %>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <%= f.password_field :password, autocomplete: "new-password", class:"form-control form-control-user",
+                                  id:"exampleInputPassword", placeholder:"Password" %>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control form-control-user",
+                                  id:"exampleRepeatPassword", placeholder:"Repeat Password" %>
+                                </div>
+                                </div>
+                                <div class="mb-3">
+                                  <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control form-control-user",
+                                  id:"exampleCurrentPassword", placeholder:"Current Password" %>
+                                </div>
+                            <%= f.submit "Update", class:"btn btn-primary btn-user btn-block" %>
+                          </form>
+                        <% end %>
+                        <div class="text-center">
+                            <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+                        </div>
+                        <div class="text-center">
+                            <%= link_to "Back", :back %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</body>
